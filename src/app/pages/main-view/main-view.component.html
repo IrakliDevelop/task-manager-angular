@@ -14,30 +14,18 @@
     </div>
 
     <div class="board-wrapper">
-      <div class="board-columns">
-        <div class="board-column">
+      <div class="board-columns" cdkDropListGroup>
+        <div *ngFor="let column of board.columns" class="board-column">
           <div class="column-title">
-            Ideas
+            {{column.name}}
           </div>
-          <div class="tasks-container">
-            <div class="task">
-              This is something that I want to do
+          <div class="tasks-container"
+               cdkDropList
+               [cdkDropListData]="column.tasks"
+               (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of column.tasks" class="task" cdkDrag>
+              {{ item }}
             </div>
-          </div>
-        </div>
-        <div class="board-column">
-          <div class="column-title">
-            Research
-          </div>
-        </div>
-        <div class="board-column">
-          <div class="column-title">
-            Todo
-          </div>
-        </div>
-        <div class="board-column">
-          <div class="column-title">
-            Done
           </div>
         </div>
       </div>
